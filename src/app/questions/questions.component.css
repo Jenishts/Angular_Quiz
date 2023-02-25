@@ -1,0 +1,32 @@
+/* .questions{
+    margin: 20px;
+    text-align: center;
+    
+} */
+
+.options ul {
+    list-style-type: none;
+   
+}
+/* .options ul li{
+    border: 1px brown solid;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: .5s;
+    cursor: pointer;
+}
+.options ul li:hover{
+
+    border-radius: 20px;
+    background-color: antiquewhite;
+} */
+
+
+*{
+    background-color: rgb(214, 223, 226);
+}
+
+.card{
+    border: none;
+}

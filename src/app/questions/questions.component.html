@@ -1,0 +1,116 @@
+<div class="container-fluid ">
+
+
+
+
+<!-- //isCompleted -->
+
+    <ng-container *ngIf="isCompleted; then quiz; else ans"></ng-container>
+
+
+    <ng-template #quiz>
+    <div class="card">
+        <div class="d-flex justify-content-between p-3">
+            <h1>Angular Test application</h1>
+            <h4>Welcome {{name}}</h4>
+        </div>
+        <div class="d-flex justify-content-around p-3">
+            <h4>Questions {{currentQuestionsNumber+1}} of {{questionlist.length}}</h4>
+        </div>
+        <div class="card-body text-primary">
+            <div class="d-flex justify-content-around questions card-title">
+                <h3> {{ questionlist[currentQuestionsNumber].questionText }} </h3>
+            </div>
+            <div class="options list-group">
+                <ul class="">  
+                    <li *ngFor="let option of questionlist[currentQuestionsNumber].options" (click)="answer(currentQuestionsNumber, option)" class="list-group-item list-group-item-action rounded-pill text-center my-2"
+                    appCorrectBg [isCorrect]="option.correct"
+                    > {{ option.text}} </li>
+                    
+                </ul>
+            </div>
+
+            <div class="">
+            <div class="d-grid gap-2">
+                <!-- <button [disabled]="currentQuestionsNumber===0" class="btn btn-outline-primary" (click)="previousQuestion()">Back</button> -->
+                <ng-container *ngIf="finalans; then nextbtn; else ras"></ng-container>
+
+                <ng-template #nextbtn>
+                <button  type="button" class="btn btn-outline-primary " (click)="nextQuestion()" id="liveToastBtn" value="hello">Next</button>
+                </ng-template>
+                <ng-template #ras>
+                <button type="button" class="btn btn-outline-primary " (click)="nextQuestion()" > Review and Submit </button>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    </div>
+    </ng-template>
+
+
+
+
+
+
+
+
+
+    <ng-template #ans>
+        <div class="card " >
+            <h5 class="card-header text-center my-3">Quiz Completed</h5>
+            <h5 class="card-title text-center my-3">
+                <div class="alert alert-success" role="alert">
+                    {{ correctAnswer.length }} correct answers
+                  </div>
+                  <div class="alert alert-danger" role="alert">
+                    {{ incorrectAnswer.length }} incorrect answers
+                  </div>
+                  <div class="alert alert-warning" role="alert" *ngIf="(correctAnswer.length+incorrectAnswer.length != questionlist.length-1)">
+                    {{ questionlist.length-(incorrectAnswer.length+correctAnswer.length) }} questions not answered
+                  </div>
+
+
+            </h5>
+            <div class="card-body text-center" >
+                
+            </div>
+          </div>
+
+
+
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-success" *ngFor="let ans of correctAnswer">{{ans }}</li>
+            <li class="list-group-item list-group-item-danger" *ngFor="let ans of incorrectAnswer">{{ans }}</li>
+         
+          </ul>
+
+
+
+
+          <ng-container *ngIf="(correctAnswer.length >= questionlist.length-4); then pass; else fail"></ng-container>
+
+          <ng-template #pass>
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">Well done!</h4>
+                <p>You have completed the test</p>
+                
+              </div>
+          </ng-template>
+
+          <ng-template #fail>
+            <div class="alert alert-danger" role="alert">
+                The answers are incorrect
+              </div>
+          </ng-template>
+
+       
+
+    </ng-template>
+
+
+
+
+</div>
+
+
+
